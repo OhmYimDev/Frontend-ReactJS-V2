@@ -1,38 +1,190 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');body {
+  font-family: 'Kanit', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: #e7f3ffd5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container-fluid {
+  min-width: 1024px !important;
+  padding: 0 1.5rem !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.text-gray {
+  color: #aaa;
 }
 
-.App-link {
-  color: #61dafb;
+.text-uppercase {
+  letter-spacing: 0.1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.icon-setting {
+  cursor: pointer;
 }
+
+.navbar {
+  z-index: 999;
+}
+
+.logo {
+  width: 40px; 
+  height: 40px;
+  /* border-radius: 50%; */
+}
+
+.navbar .slogan {
+  font-size: .7rem;
+}
+
+.navbar .search-input {
+  border-radius: 0 50px 50px 0;
+  border-left: none;
+  margin-right: 1.5rem;
+}
+
+.navbar .search > i {
+  background: #fff;
+  line-height: 40px;
+  width: 40px;
+  height: 40px; 
+  border-radius: 50px 0 0 50px;
+  border: 1px solid #ced4da;
+  border-right: none;
+  padding-left: .5rem;
+}
+
+.navbar .search {
+  border-right: 1px solid #ced4da;
+  margin-right: 1.5rem;
+}
+
+.navbar .menu-group .menu-icon {
+  color: rgb(61, 61, 61);
+  font-size: 1.8rem;
+}
+
+.navbar .menu-group .menu-icon-user {
+  width: 30px;
+  height: 30px;
+}
+
+/* ---------- Main Page ---------- */
+.vertical-nav {
+  width: 17rem;
+  height: 100vh;
+  margin-left: -17rem;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+  color: #fff;
+}
+
+.vertical-nav .heading .icon-wrapper {
+  color: rgb(156, 156, 156);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.vertical-nav .dropdown-menu {
+  width: 100%;
+  background-color: #212529;
+}
+
+.vertical-nav .dropdown .dropdown-menu li {
+  list-style: circle;
+  color: #fff;
+}
+
+.vertical-nav .dropdown .dropdown-menu .dropdown-item,
+.vertical-nav .dropdown .dropdown-menu .dropdown-item:hover
+ {
+  color: #fff;
+  background-color: #212529;
+}
+
+.dropdown-toggle::after {
+  margin-left: 9.8em !important;
+  color: rgb(156, 156, 156);
+}
+
+.page-content {
+  width: 100%;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.page-content .heading-icon {
+  background-color: #E5E5E5;
+  cursor: pointer;
+  font-size: .9rem;
+}
+
+.page-content .icon-toggle {
+  color: rgb(61, 61, 61);
+  cursor: pointer;
+}
+
+/* ---------- for toggle behavior ---------- */
+#sidebar.active {
+  margin: 0;
+}
+
+#btn-sidebar.display-none {
+  display: none;
+}
+/* -------------------- */
+
+.nav-btn {
+  border: 1px solid #333;
+  transition: all 0.3s;
+}
+.nav-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.nav-filter {
+  background-color: #f1f1f1;
+}
+
+.nav-filter span {
+  color:rgb(85, 85, 85);
+  font-weight: 600;
+}
+
+.nav-filter .icon-pin {
+  background-color: #cfcfcf;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.nav-filter .menu-wrapper .nav-btn {
+  width: 70px;
+  background-color: #fff;
+}
+.nav-filter .menu-wrapper .nav-btn:hover,
+.nav-filter .icon-pin:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.nav-filter .dropdown-toggle::after,
+.row-btn.dropdown-toggle::after {
+  display: none !important;
+}
+
+img {
+  width: 45px;
+  height: 45px;
+}
+
+.row-btn {
+  width: 40px;
+  border: none;
+  transition: .3s;
+}
+.row-btn:hover {
+  background-color: #fff;
+  color: #333;
+}
+
