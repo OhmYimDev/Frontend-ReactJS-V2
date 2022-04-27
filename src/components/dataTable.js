@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Styled from 'styled-components';
 import { useTable, usePagination } from 'react-table';
 import makeData from '../dummyData.json';
-import { useFlexLayout } from 'react-table/dist/react-table.development';
+import { useFlexLayout } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faEllipsis, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -21,6 +21,7 @@ const DataTable = () => {
 
     `
     const Table = ({ columns, data }) => {
+
         const {
             getTableProps,
             getTableBodyProps,
@@ -47,32 +48,31 @@ const DataTable = () => {
             useFlexLayout
         )
 
-
         return (
             <div  className='container-fluid'>
-                <table className='table table-striped' {...getTableProps()}>
-                    <thead>
-                        {headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody  {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row)
-                            return (
-                                <tr  {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    })}
+                    <table className='table table-striped' {...getTableProps()}>
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                    ))}
                                 </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                            ))}
+                        </thead>
+                        <tbody  {...getTableBodyProps()}>
+                            {page.map((row, i) => {
+                                prepareRow(row)
+                                return (
+                                    <tr  {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
         
                 {/* Pagination */}
                 <div className='pagiantion d-flex align-items-center justify-content-between'>
@@ -127,6 +127,7 @@ const DataTable = () => {
           )
     }
 
+
     const columns  = [
         {
             Header: 'ผู้ติดต่อ',
@@ -137,32 +138,39 @@ const DataTable = () => {
         {
             Header: 'ชื่อ',
             accessor: 'firstName',
-            width: 20
+            width: 30,
+            minWidth: 30
         },
         {
             Header: 'นามสกุล',
             accessor: 'lastName',
-            width: 20
+            width: 30,
+            minWidth: 30
         },
         {
             Header: 'บริษัท',
             accessor: 'companyName',
-            width: 50
+            width: 50,
+            minWidth: 50
         },
         {
             Header: 'ติดต่อล่าสุด',
             accessor: 'date',
-            width: 50
+            width: 50,
+            minWidth: 50
         },
         {
             Header: 'อีเมลล์',
             accessor: 'email',
-            width: 50
+            width: 50,
+            minWidth: 50
         },
         {
             Header: 'ที่อยู่',
             accessor: 'city',
-            width: 50
+            width: 50,
+            minWidth: 50
+
         },
         {
             Header: '',

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleLeft, faBars, faChartLine, faDisplay, faFileSignature, faFilter, faGear, faMapPin, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faAddressBook, faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import DataTable from './dataTable';
+import { Routes, Route, Link } from "react-router-dom";
+import DragDropList from './dragDropList';
 
 const MainPage = () => {
 
@@ -94,10 +96,10 @@ const MainPage = () => {
               </button>
               <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
                 <li>
-                  <div className='dropdown-item'>
+                  <Link to='/selectdisplay' className='dropdown-item'>
                     <FontAwesomeIcon className='me-2' icon={faDisplay}/>
                     Select to display
-                  </div>
+                  </Link>
                 </li>
                 <li>
                   <div className='dropdown-item'>
@@ -116,8 +118,13 @@ const MainPage = () => {
           </div>
         </nav>
 
-        {/* ---------- Data table ---------- */}
-        <DataTable/>
+        <Routes>
+          <Route path='/' element={<DataTable/>}/>
+          <Route path='selectdisplay' element={<DragDropList/>} />
+        </Routes>
+
+        
+        
         
 
       </div>
