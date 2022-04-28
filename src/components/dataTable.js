@@ -1,16 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Styled from 'styled-components';
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination, useColumnOrder } from 'react-table';
 import makeData from '../dummyData.json';
 import { useFlexLayout } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faEllipsis, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faCommentsDollar, faEllipsis, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
-const DataTable = () => {
+const DataTable = ({columnData}) => {
+
+    const [colData, setColData] = useState([]);
 
     const Styles = Styled.div`
-
         table {
             margin-bottom: 1rem;
         }
@@ -18,7 +19,6 @@ const DataTable = () => {
             display: flex;
             align-items: center;
         }
-
     `
     const Table = ({ columns, data }) => {
 
@@ -37,6 +37,8 @@ const DataTable = () => {
             nextPage,
             previousPage,
             setPageSize,
+            visibleColumns,
+            setColumnOrder,
             state: { pageIndex, pageSize },
         } = useTable(
             {
@@ -45,11 +47,13 @@ const DataTable = () => {
                 initialState: { pageIdex: 1 },
             },
             usePagination,
-            useFlexLayout
+            useFlexLayout,
+            useColumnOrder
         )
 
+        const result = visibleColumns.map(d => d.id);
         return (
-            <div  className='container-fluid'>
+            <div className='container-fluid'>
                     <table className='table table-striped' {...getTableProps()}>
                         <thead>
                             {headerGroups.map(headerGroup => (
@@ -121,12 +125,10 @@ const DataTable = () => {
                             {pageIndex + 1} of {pageOptions.length} from {data.length}
                         </span>
                     </div>
-
                 </div>
             </div>
           )
     }
-
 
     const columns  = [
         {
@@ -170,7 +172,7 @@ const DataTable = () => {
             accessor: 'city',
             width: 50,
             minWidth: 50
-
+    
         },
         {
             Header: '',
@@ -199,7 +201,7 @@ const DataTable = () => {
             )        
         }
     ]
-
+    
     return (
         <Styles>
             <Table columns={columns} data={makeData} />

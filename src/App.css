@@ -215,6 +215,7 @@ img {
   border: 1px solid #cfcfcf;
   border-radius:15px;
   width: 350px;
+  cursor: pointer;
 }
 .select-display .card-item:focus {
   background-color: red;

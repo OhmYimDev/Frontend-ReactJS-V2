@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleLeft, faBars, faChartLine, faDisplay, faFileSignature, faFilter, faGear, faMapPin, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faAddressBook, faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -9,10 +9,22 @@ import DragDropList from './dragDropList';
 const MainPage = () => {
 
     const [isActive, setIsActive] = useState(false);
+    const [columnList, setColumnList] = useState([]);
+    const [enteredColumn, setEnteredColumn] = useState([]);
+
+    const handleColumnData = (data) => {
+      setColumnList(data);
+      console.log('Column from DataTAble component :', columnList);
+    }
 
     const handleSidebarToggle = () => {
         setIsActive(!isActive);
     }
+
+    const handleColumnChange = (res) => {
+      setEnteredColumn(res);
+    }
+    //console.log('Entered Column :', enteredColumn);
 
   return (
     <div className='maincontainer d-flex' >
@@ -96,7 +108,7 @@ const MainPage = () => {
               </button>
               <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
                 <li>
-                  <Link to='/selectdisplay' className='dropdown-item'>
+                  <Link to='/selectDisplay' className='dropdown-item'>
                     <FontAwesomeIcon className='me-2' icon={faDisplay}/>
                     Select to display
                   </Link>
@@ -119,14 +131,10 @@ const MainPage = () => {
         </nav>
 
         <Routes>
-          <Route path='/' element={<DataTable/>}/>
-          <Route path='selectdisplay' element={<DragDropList/>} />
+          <Route path='/' element={<DataTable columnData={handleColumnData} />}/>
+          <Route path='selectDisplay' element={<DragDropList enteredColumn={handleColumnChange} data={columnList} />} />
         </Routes>
-
         
-        
-        
-
       </div>
     </div>
   )
