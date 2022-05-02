@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { List, arrayMove, arrayRemove  } from "react-movable";
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import DataColumns from '../data/DataContext';
 
-const DragDropList = ({enteredColumn, data}) => {
+const DragDropList = (props) => {
     
-    // const [items, setItems] = useState([]);  
-    const [makeItems, setMakeItems] = useState(["Item 1", "Item 2", "Item 3", "Item 4","Item 5","Item 6"]); 
-     
-    // useEffect(() => {
-    //     setItems(props.data);
-    // },[])
-    // console.log('Set Items :', items);
+    const [column, setColumn] = useState(props.visibleColumns); 
+
+    const handleDataColumnChange = () => {
+        props.onColumnsChange(column);
+    }
 
   return (
     <div className='select-display container-fluid d-flex justify-content-center'>
@@ -29,19 +28,19 @@ const DragDropList = ({enteredColumn, data}) => {
                     {/* {items.map((item, i) => {
                         return( */}
                             <List
-                            values={makeItems}
+                            values={column}
                              onChange={({oldIndex, newIndex}) => 
-                             setMakeItems(arrayMove(makeItems, oldIndex, newIndex))
+                             setColumn(arrayMove(column, oldIndex, newIndex))
                             }
                             renderList={({ children, props }) => <ul {...props}>{children}</ul>}
                             renderItem={({ value, props, index, isDragged, inSelected }) => (
                                 <li className='card-item bg-white d-flex justify-content-between align-items-center' {...props} >
                                     <div>{value}</div>
                                     <button className='btn shadow-none' onClick={() =>{
-                                        setMakeItems(
+                                        setColumn(
                                         typeof index !== 'undefined' 
-                                        ? arrayRemove(makeItems, index)
-                                        : makeItems
+                                        ? arrayRemove(column, index)
+                                        : column
                                         )
                                     }}>
                                     <FontAwesomeIcon icon={faXmark}/>
@@ -52,9 +51,7 @@ const DragDropList = ({enteredColumn, data}) => {
                         {/* )
                     })} */}
                     <div className='wrapper mt-4 d-flex justify-content-center align-items-center gap-3'>
-                        <Link to="/" className='btn btn-primary btn-save' onClick={() => {
-                            enteredColumn(makeItems)
-                        }}>Save</Link>
+                        <Link to="/" onClick={handleDataColumnChange} className='btn btn-primary btn-save'>Save</Link>
                         <button className='btn btn-white btn-cancle'>Cancle</button>
                     </div>
                 </div>
