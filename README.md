@@ -1,4 +1,6 @@
-#Installation
+# React Datatable
+
+Installation
 - npm install
 - npm start
 
